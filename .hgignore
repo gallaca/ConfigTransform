@@ -1,0 +1,12 @@
+syntax: regexp
+(^|/)_ReSharper
+/bin/
+/obj/
+(^|/)TestResults/
+.user$
+.suo$
+^Publish/
+.bak$
+.nupkg$
+.transformed$
+/output/

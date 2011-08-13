@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="Build">
+    <ItemGroup>
+      <None Include="web.config" />
+      <None Include="web.debug.config" />
+      <None Include="web.release.config" />
+      <None Include="notweb.config" />
+      <None Include="notweb.debug.config" />
+      <None Include="notaconfig.txt" />
+	  
+      <WebConfigTransformFile Include="@(None)" Condition="'$([System.Text.RegularExpressions.Regex]::IsMatch(%(Filename),&quot;(?i)^web\.&quot;))' == true and '%(Extension)'=='.config'" />
+    </ItemGroup>
+
+	<Message Text="@(WebConfigTransformFile,'%0d%0a')" />
+	
+  </Target>
+
+</Project>

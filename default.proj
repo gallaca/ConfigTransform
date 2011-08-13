@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Test" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <OutDir Condition="'$(OutDir)'==''">output\</OutDir>
+	<NugetTool>nuget\nuget.exe</NugetTool>
+  </PropertyGroup>
+
+  <Target Name="Test">
+    <MSBuild Projects="test/WebApplication1/WebApplication1.csproj" Properties="Configuration=Release;OutDir=output\" Targets="Clean;Build" />
+  </Target>
+
+  <Target Name="Package">
+    <MakeDir Directories="$(OutDir)" />
+    <Exec Command="$(NugetTool) pack CodeAssassin.ConfigTransform.nuspec -OutputDirectory $(OutDir)" />
+  </Target>
+
+  <Target Name="Publish" DependsOnTargets="Test;Package">
+    <ItemGroup>
+	  <NugetPackage Include="$(OutDir)\*.nupkg" />
+	</ItemGroup>
+	<Exec Command="$(NugetTool) push @(NugetPackage) $(NugetApiKey)" />
+  </Target>
+  
+</Project>
