@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>CodeAssassin.ConfigTransforms</id>
+    <id>CodeAssassin.ConfigTransform</id>
     <version>1.0</version>
     <authors>Jason Stangroome</authors>
     <owners>Jason Stangroome</owners>
@@ -12,6 +12,7 @@
     <tags>Tag1 Tag2</tags>
   </metadata>
   <files>
-    <file src="CodeAssassin.ConfigTransform.targets" target="lib" />
+    <file src="CodeAssassin.ConfigTransform.targets" target="tools" />
+    <file src="install.ps1" target="tools" />
   </files>
 </package>
