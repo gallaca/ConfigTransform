@@ -14,5 +14,7 @@
   <files>
     <file src="CodeAssassin.ConfigTransform.targets" target="tools" />
     <file src="install.ps1" target="tools" />
+    <file src="uninstall.ps1" target="tools" />
+    <file src="CodeAssassin.ConfigTransform.Readme.txt" target="content" />
   </files>
 </package>
