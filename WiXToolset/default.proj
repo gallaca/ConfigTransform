@@ -22,6 +22,11 @@
   </Target>
 
   <Target Name="Gather" DependsOnTargets="Clean">
+    <Error Condition=" '@(WixTargetsFile)' == '' "
+           Text="WiX target files not found at '$(WixTargetsPath)'. Ensure the official WiX toolset is installed." />
+    <Error Condition=" '@(WixToolFile)' == '' "
+           Text="WiX tools not found at '$(WixToolPath)'. Ensure the official WiX toolset is installed." />
+
     <MakeDir Directories="files\tools\v3.x" />
     <Copy SourceFiles="@(WixTargetsFile)"
           DestinationFiles="files\tools\v3.x\%(RecursiveDir)%(FileName)%(Extension)" />
