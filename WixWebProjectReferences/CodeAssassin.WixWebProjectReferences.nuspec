@@ -6,7 +6,7 @@
 	<title>Wix Web Project References</title>
     <authors>Jason Stangroome</authors>
     <owners>Jason Stangroome</owners>
-    <licenseUrl>https://bitbucket.org/jstangroome/configtransform/raw/7bf13f3c914e/licence.txt</licenseUrl>
+    <licenseUrl>https://bitbucket.org/jstangroome/configtransform/src/091f3a462aa9/WixWebProjectReferences/licence.txt</licenseUrl>
     <projectUrl>https://bitbucket.org/jstangroome/configtransform</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Enables a WiX project to harvest all files in a referenced Web project.</summary>
