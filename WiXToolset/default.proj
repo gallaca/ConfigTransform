@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Package" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <OutDir Condition="'$(OutDir)'==''">output\</OutDir>
+    <NugetTool>nuget\nuget.exe</NugetTool>
+    <WixTargetsPath Condition=" '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(MSBuildExtensionsPath32)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\</WixTargetsPath>
+    <WixToolPath Condition=" '$(MSBuildExtensionsPath32)' != '' ">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows Installer XML\3.5@InstallRoot)</WixToolPath>
+    <WixToolPath Condition=" '$(MSBuildExtensionsPath32)' == '' ">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Installer XML\3.5@InstallRoot)</WixToolPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <WixTargetsFile Include="$(WixTargetsPath)**\*.*" />
+    <WixToolFile Include="$(WixToolPath)**\*.*" />
+  </ItemGroup>
+
+  <Target Name="Clean">
+    <RemoveDir Directories="$(OutDir)" />
+    <RemoveDir Directories="files\tools\v3.x" />
+    <RemoveDir Directories="files\tools\bin" />
+  </Target>
+
+  <Target Name="Gather" DependsOnTargets="Clean">
+    <MakeDir Directories="files\tools\v3.x" />
+    <Copy SourceFiles="@(WixTargetsFile)"
+          DestinationFiles="files\tools\v3.x\%(RecursiveDir)%(FileName)%(Extension)" />
+
+    <MakeDir Directories="files\tools\bin" />
+    <Copy SourceFiles="@(WixToolFile)"
+          DestinationFiles="files\tools\bin\%(RecursiveDir)%(FileName)%(Extension)" />
+  </Target>
+  
+  <Target Name="Package" DependsOnTargets="Gather">
+    <MakeDir Directories="$(OutDir)" />
+    <Exec Command="$(NugetTool) pack files\WiXToolset.nuspec -OutputDirectory $(OutDir)" />
+  </Target>
+
+</Project>

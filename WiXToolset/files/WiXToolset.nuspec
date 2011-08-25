@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>WiXToolset</id>
+    <version>3.5</version>
+	<title>Windows Installer XML (WiX) toolset</title>
+    <authors>WiX Team</authors>
+    <owners>WiX Team</owners>
+    <licenseUrl>http://wix.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wix.sourceforge.net/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <summary>Builds Windows installation packages from XML source code.</summary>
+    <description>The Windows Installer XML (WiX) is a toolset that builds Windows installation packages from XML source code.</description>
+    <tags>WiX MSI Installer</tags>
+  </metadata>
+</package>

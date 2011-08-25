@@ -1,0 +1,2 @@
+This unofficial Nuget package enables WiX projects to be built without
+installing the full WiX Toolset. This is especially useful for build servers.
