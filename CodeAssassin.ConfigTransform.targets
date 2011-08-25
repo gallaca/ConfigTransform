@@ -38,6 +38,6 @@
     <TransformXml Source="app.config" Destination="$(OutDir)%(AppConfigTransformFile.Identity)ed" Transform="@(AppConfigTransformFile)" 
                   Condition="'@(AppConfigTransformFile)'!=''" />
 
-</Target>
+  </Target>
 
 </Project>
