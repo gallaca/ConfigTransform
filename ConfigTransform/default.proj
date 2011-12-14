@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <OutDir Condition="'$(OutDir)'==''">output\</OutDir>
-	<NugetTool>nuget\nuget.exe</NugetTool>
+    <NugetTool>nuget\nuget.exe</NugetTool>
   </PropertyGroup>
 
   <Target Name="Test">
@@ -11,16 +11,22 @@
     <MSBuild Projects="test/WindowsFormsApplication1/WindowsFormsApplication1.csproj" Properties="Configuration=Release;OutputPath=output\" Targets="Clean;Build;Publish" />
   </Target>
 
+  <Target Name="Clean">
+    <RemoveDir Directories="$(OutDir)" />
+  </Target>
+
   <Target Name="Package">
     <MakeDir Directories="$(OutDir)" />
     <Exec Command="$(NugetTool) pack CodeAssassin.ConfigTransform.nuspec -OutputDirectory $(OutDir)" />
   </Target>
 
-  <Target Name="Publish" DependsOnTargets="Test;Package">
+  <Target Name="Publish" DependsOnTargets="Clean;Test;Package">
+    <Error Text="NugetApiKey property or environment variable must be set." 
+           Condition="'$(NugetApiKey)'==''" />
     <ItemGroup>
-	  <NugetPackage Include="$(OutDir)\*.nupkg" />
-	</ItemGroup>
-	<Exec Command="$(NugetTool) push @(NugetPackage) $(NugetApiKey)" />
+      <NugetPackage Include="$(OutDir)\*.nupkg" />
+    </ItemGroup>
+    <Exec Command="$(NugetTool) push @(NugetPackage) $(NugetApiKey)" />
   </Target>
-  
+
 </Project>
