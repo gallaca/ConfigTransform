@@ -1,19 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <UsingTask TaskName="TransformXml" 
+  <UsingTask TaskName="TransformXml"
              AssemblyFile="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll" />
-
-  <PropertyGroup>
-    <CompileDependsOn Condition="'$(WebProjectOutputDir)'==''">
-      $(CompileDependsOn);
-      TransformAllAppConfigTransformFiles;
-    </CompileDependsOn >
-  </PropertyGroup>
 
   <Target Name="TransformAllWebConfigTransformFiles"
           Condition="'$(WebProjectOutputDir)'!=''"
-		  BeforeTargets="Compile">
+          BeforeTargets="Compile">
 
     <ItemGroup>
       <WebConfigTransformFile Include="@(None)" Condition="'$([System.Text.RegularExpressions.Regex]::IsMatch(%(Filename),&quot;(?i)^web\.&quot;))' == true and '%(Extension)'=='.config'" />
@@ -29,14 +22,21 @@
 
   </Target>
 
-  <Target Name="TransformAllAppConfigTransformFiles">
+  <Target Name="TransformAllAppConfigTransformFiles"
+          Condition="'$(WebProjectOutputDir)'==''"
+          BeforeTargets="AssignTargetPaths">
 
     <ItemGroup>
-      <AppConfigTransformFile Include="@(None)" Condition="'%(Extension)'=='.transform'" />
+      <AppConfigTransformFile Include="@(None);@(Content)" Condition="'$([System.Text.RegularExpressions.Regex]::IsMatch(%(Filename),&quot;(?i)^app\.&quot;))' == true and '%(Extension)'=='.config'" />
     </ItemGroup>
 
-    <TransformXml Source="app.config" Destination="$(OutDir)%(AppConfigTransformFile.Identity)ed" Transform="@(AppConfigTransformFile)" 
+    <TransformXml Source="app.config" Destination="%(AppConfigTransformFile.Identity).transformed" Transform="@(AppConfigTransformFile)"
                   Condition="'@(AppConfigTransformFile)'!=''" />
+
+    <CreateItem Include="%(AppConfigTransformFile.Identity).transformed"
+                AdditionalMetadata="CopyToOutputDirectory=Always">
+      <Output TaskParameter="Include" ItemName="Content"/>
+    </CreateItem>
 
   </Target>
 

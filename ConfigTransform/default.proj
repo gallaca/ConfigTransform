@@ -8,6 +8,7 @@
 
   <Target Name="Test">
     <MSBuild Projects="test/WebApplication1/WebApplication1.csproj" Properties="Configuration=Release;OutDir=output\" Targets="Clean;Build" />
+    <MSBuild Projects="test/WindowsFormsApplication1/WindowsFormsApplication1.csproj" Properties="Configuration=Release;OutputPath=output\" Targets="Clean;Build;Publish" />
   </Target>
 
   <Target Name="Package">
