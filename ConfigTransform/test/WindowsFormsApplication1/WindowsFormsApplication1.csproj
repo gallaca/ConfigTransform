@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>F849836615B8DD18A4C4B2B9134D26E8BA28AF11</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>21B195B2E0C582E52EAAD14AAA92735C12494053</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>WindowsFormsApplication1_TemporaryKey.pfx</ManifestKeyFile>

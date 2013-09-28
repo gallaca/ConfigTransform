@@ -24,7 +24,7 @@
     <Error Text="NugetApiKey property or environment variable must be set." 
            Condition="'$(NugetApiKey)'==''" />
     <ItemGroup>
-      <NugetPackage Include="$(OutDir)\*.nupkg" />
+      <NugetPackage Include="$(OutDir)*.nupkg" />
     </ItemGroup>
     <Exec Command="$(NugetTool) push @(NugetPackage) $(NugetApiKey)" />
   </Target>
