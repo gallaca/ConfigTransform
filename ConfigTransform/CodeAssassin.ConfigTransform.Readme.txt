@@ -4,5 +4,7 @@ of the chosen build configuration.
 
 The same applies to "app.*.config" transform files in non-web projects.
 
+Now also supports "log4net.*.config" transform files in all projects. 
+
 Transformation Syntax documentation is available on MSDN Library:
 http://msdn.microsoft.com/en-us/library/dd465326.aspx

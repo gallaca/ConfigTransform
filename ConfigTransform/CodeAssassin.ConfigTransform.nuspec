@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>CodeAssassin.ConfigTransform</id>
-    <version>1.2</version>
-	<title>Config Transform</title>
-    <authors>Jason Stangroome</authors>
+    <version>1.3</version>
+    <title>Config Transform</title>
+    <authors>Jason Stangroome, Andrew Gallacher</authors>
     <owners>Jason Stangroome</owners>
     <licenseUrl>https://bitbucket.org/jstangroome/configtransform/raw/7bf13f3c914e/licence.txt</licenseUrl>
     <projectUrl>https://bitbucket.org/jstangroome/configtransform</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>Transforms all *.config files at build time.</summary>
-    <description>Transforms all *.config files at build time instead of the default MSBuild behaviour of only transforming the configuration file matching the current build configuration.</description>
+    <summary>Transforms all web.config, app.config and log4net.config files at build time.</summary>
+    <description>Change by Andrew Gallacher at Mentor. Version 1.3 now also supports log4net.config</description>
     <tags>web.config transform</tags>
   </metadata>
   <files>

@@ -27,6 +27,29 @@
 
   </Target>
 
+  <Target Name="TransformAllLog4NetConfigTransformFiles"
+          Condition="'$(WebProjectOutputDir)'!=''"
+          BeforeTargets="Compile;PipelineTransformPhase">
+
+    <ItemGroup>
+      <Log4NetConfigTransformFile Include="@(None)" Condition="'$([System.Text.RegularExpressions.Regex]::IsMatch(%(Filename),&quot;(?i)^log4net\.&quot;))' == true and '%(Extension)'=='.config'" />
+      <Log4NetConfigTransformFile Include="@(Content)" Condition="'$([System.Text.RegularExpressions.Regex]::IsMatch(%(Filename),&quot;(?i)^log4net\.&quot;))' == true and '%(Extension)'=='.config'" />
+    </ItemGroup>
+
+    <TransformXml Source="log4net.config" Destination="%(Log4NetConfigTransformFile.Identity).transformed" Transform="@(Log4NetConfigTransformFile)"
+                  Condition="'@(Log4NetConfigTransformFile)'!=''" />
+
+    <CreateItem Include="%(Log4NetConfigTransformFile.Identity).transformed">
+      <Output TaskParameter="Include" ItemName="Content" />
+    </CreateItem>
+
+    <CreateItem Include="%(Log4NetConfigTransformFile.Identity).transformed"
+                AdditionalMetadata="DestinationRelativePath=%(Log4NetConfigTransformFile.Identity).transformed">
+      <Output TaskParameter="Include" ItemName="FilesForPackagingFromProject" />
+    </CreateItem>
+
+  </Target>
+
   <Target Name="TransformAllAppConfigTransformFiles"
           Condition="'$(WebProjectOutputDir)'==''"
           BeforeTargets="AssignTargetPaths">
